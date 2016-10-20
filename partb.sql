@@ -33,8 +33,9 @@ COMMIT;
 
 -- T5
 BEGIN; 
-UPDATE Client SET marital_status = "Married", postal_code = "M3B 3R5‎", phone_number="4162345432", WHERE client_number = 999433;
+UPDATE Client SET marital_status='Married', postal_code='M3B 3R5‎', phone_number=4162345432, WHERE client_number = 999433;
 UPDATE Account SET branch_number = 100;
+COMMIT;
 
 -- T6
 BEGIN;
