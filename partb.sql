@@ -33,8 +33,8 @@ COMMIT;
 
 -- T5
 BEGIN; 
-UPDATE Client SET marital_status='Married', postal_code='M3B 3R5‎', phone_number=4162345432, WHERE client_number = 999433;
-UPDATE Account SET branch_number = 100;
+UPDATE Client SET marital_status='Married', postal_code='M3B 3R5‎', phone=4162345432 WHERE client_number = 999433;
+UPDATE Account SET branch_number = 100 WHERE account_number = (SELECT account_number FROM Owns WHERE client_number = 999433);
 COMMIT;
 
 -- T6
@@ -45,8 +45,8 @@ COMMIT;
 
 -- T7
 BEGIN;
-SELECT branch_number INTO downtown_calgary FROM Branch WHERE city='Calgary' AND branch_name='Downtown';
-SELECT avg(dollar_balance) as Average Balance FROM Account where branch_number = downtown_calgary;
+SELECT AVG(dollar_balance) AS Average_Balance FROM Account WHERE branch_number = 
+(SELECT branch_number FROM Branch WHERE city='Calgary' AND branch_name='Downtown');
 COMMIT;
 
 -- T8
