@@ -39,8 +39,8 @@ COMMIT;
 
 -- T6
 BEGIN;
-SELECT branch_number INTO toronto_branch FROM Branch WHERE city='Toronto' AND branch_name='Downtown';
-SELECT SUM(dollar_balance) FROM Account WHERE branch_number=toronto_branch;
+SELECT SUM(dollar_balance) FROM Account WHERE branch_number=
+(SELECT branch_number FROM Branch WHERE city='Toronto' AND branch_name='Downtown');
 COMMIT;
 
 -- T7
@@ -56,8 +56,8 @@ COMMIT;
 
 -- T9
 BEGIN;
-SELECT branch_number INTO toronto_branch FROM Branch WHERE city='Toronto' AND branch_name='Downtown';
-INSERT INTO account(account_number, dollar_balance, branch_number) VALUES (425450, 600000.00, toronto_branch);
+INSERT INTO account(account_number, dollar_balance, branch_number) VALUES 
+(425450, 600000.00, (SELECT branch_number FROM Branch WHERE city='Toronto' AND branch_name='Downtown'));
 UPDATE account SET dollar_balance = dollar_balance - 600000 WHERE account_number = 445128;
 COMMIT;
 
